@@ -1,5 +1,6 @@
 __pycache__
 
+static/fonts/fonts_zip
 
 *.crt
 *.key
