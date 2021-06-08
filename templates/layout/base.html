@@ -1,0 +1,63 @@
+{% load static %}
+
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+	<meta http-equiv="Content-Type" content="text/html" charset="UTF-8">
+	<link rel = "stylesheet" type="text/css" href="{% static 'css/style.css' %}"/>
+	<link rel="shortcut icon" href="{% static 'icons/tree.svg' %}" type="image/x-icon">	
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<title>{% block title %}{% endblock %}</title>
+	<meta name="theme-color" content="#669966">
+	<meta http-equiv="X-UA-Compatible" content="IE=Edge,chrome=1"/>
+	<link rel = "stylesheet" type="text/css" href="{% static 'css/bootstrap.css' %}"/>
+</head>
+
+<body>
+	<div class="wrapper">
+	<header>
+		<nav class="navbar navbar-expand-md navbar-light base_nav">
+		    <button class="navbar-toggler nav_button " type="button" data-toggle="collapse" data-target="#navbarNavAltMarkup" aria-controls="navbarNavAltMarkup" aria-expanded="false" aria-label="Toggle navigation">
+		    <span class="navbar-toggler-icon"></span>
+	       </button>
+	      	<div class="collapse navbar-collapse" id="navbarNavAltMarkup">
+				<div class="navbar-nav">
+					<a class="nav-item nav-link main_navigation_links" href="{% url 'ecoshop:test' %}">Главное меню</a>
+					{% if request.user.is_authenticated %}
+						<a class="nav-item nav-link main_navigation_links" href="{% url 'accounts:home' %}">Личный кабинет</a>
+					{% else %}
+						<a class="nav-item nav-link main_navigation_links" href="{% url 'accounts:login' %}">Войти</a>
+					{% endif %}
+					<a class="nav-item nav-link main_navigation_links" href="{% url 'ecoshop:catalogs_list' %}">Каталоги</a>
+					<form action="{% url 'ecoshop:search' %}" method="POST" class="form-inline search_form">
+						{% csrf_token %}
+						<input class="form-control mr-sm-2 searchbar" name="searched" type="search" placeholder="Искать" aria-label="Поиск">
+						<button class="btn btn-outline-light" type="submit" href='#'><img height=21px; src="{% static 'icons/search.svg' %}" alt="icon"/></button>			
+					</form>	
+				</div>
+        	</div>	
+
+        </nav>
+	</header>
+
+	<main class="main">
+		{% block main %}
+		{% endblock %}
+	</main>
+
+	<footer class = "footer">
+		<div class="footer_class">
+			<p>Эко-магазин от Лизы.</p>
+			<p>
+			  <a href="#" style="color:#669966">Вернуться к началу.</a>
+			</p>
+		</div>
+	</footer>
+	</div>
+	
+	<script type="text/javascript" src="https://code.jquery.com/jquery-3.5.1.slim.min.js" integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj" crossorigin="anonymous"></script>
+	<script type="text/javascript" src="{% static 'js/bootstrap.js' %}"></script>
+
+</body>
+
+</html>

@@ -1,0 +1,20 @@
+{% extends "layout/base.html" %}
+
+{% block main %}
+<div class="container">
+  <div class="row justify-content-center mt-5">
+    <div class="col-12 col-sm-8 col-md-6 col-lg-4 col-xl-4">
+      <ul class="list-group text-center" style="border: 1px solid rgba(0, 0, 0, 0.125) !important;">
+        <li class="list-group-item active" aria-current="true">Ссылки на основные странички и данные для админки</li>
+        <li class="list-group-item"><a href="{% url 'admin:index' %}" target="_blank">Админ панель</a></li>
+        <li class="list-group-item"><a href="{% url 'accounts:home' %}">Личный кабинет</a></li>
+        <li class="list-group-item"><a href="{% url 'accounts:reset_password' %}">Смена пароля</a></li>
+        <li class="list-group-item"><a href="{% url 'accounts:login' %}">Логин</a></li>
+        <li class="list-group-item"><a href="{% url 'accounts:register' %}">Регистрация</a></li>
+        <li class="list-group-item"><a href="{% url 'accounts:logout' %}">Логаут</a></li>
+        <li class="list-group-item">Для входа в админку:<br>Логин: admineco <br>Пароль: 1234</li>
+      </ul>
+    </div>
+  </div>
+</div>
+{% endblock %}

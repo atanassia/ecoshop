@@ -1,0 +1,139 @@
+{% extends "layout/base.html" %}
+
+{% load static %}
+
+{% block title %}{{ goods.goods_name }}{% endblock %}
+
+{% block main %}
+<div class="container" style="margin-top: 5%;">
+
+    <div class="row justify-content-md-center">
+
+        <div class="col-12 col-sm-12 col-md-6 col-lg-6 col-xl-6 align-self-center">
+           <img src="{{ goods.goods_image.url }}" class="img-fluid" alt="Адаптивные изображения" style="border-radius: 30px;">
+        </div>
+
+        <div class="col-12 col-sm-12 col-md-6 .col-lg-6 .col-xl-6">
+            <div class="informayion_about_product" style="margin-left: 5%;">
+
+            <ul class="list-group goods_page_ul">
+                <li class="list-group-item goods_page_breadcrumb list-goods-style">
+                    <nav aria-label="breadcrumb goods_page_breadcrumb">
+                    <ol class="breadcrumb">
+                    <li class="breadcrumb-item"><a href="{% url 'ecoshop:catalogs_list' %}" class="breadcrumb_link">Каталог</a></li>
+                    <li class="breadcrumb-item"><a href="{% url 'ecoshop:goods_list' goods.category_name.category_slug %}" class="breadcrumb_link">{{ goods.category_name }}</a></li>
+                    <li class="breadcrumb-item active" aria-current="page" class="breadcrumb_link">{{ goods.goods_name }}</li>
+                    </ol>
+                    </nav>
+                </li>
+
+                <li class="list-group-item goods_page_header_code list-goods-style"><h2>{{ goods.goods_name }}</h2></li>
+                <li class="list-group-item goods_price list-goods-style">{{ goods.price }} &#8381; </li>
+                <li class="list-group-item goods_page_header_code list-goods-style">Код товара: {{ goods.product_code }}</li>
+                <li class="list-group-item goods_status list-goods-style">{{ goods.get_status_display }} </li>
+                <li class="list-group-item list-goods-style">
+                    <a class="btn btn-primary" type="submit">Добавить в корзину</a>
+                    {% if user.is_authenticated %}
+                        <form style = "display: inline-block;" class = "like_form" action="{% url 'ecoshop:like_goods' %}" method="POST">
+                            {% csrf_token %}
+                            {% if is_liked %}
+                                <button class="btn" type="submit" name="goods_id" value ="{{ goods.id }}"><img alt="" class="" src="{% static 'icons/red_heart.svg' %}"></button>
+                            {% else %}
+                                <button class="btn" type="submit" name="goods_id" value ="{{ goods.id }}"><img alt="" class="" src="{% static 'icons/heart.svg' %}"></button>
+                            {% endif %}
+                        </form>
+                    {% endif %}
+                </li>
+                {% if goods.tags %}
+                <li class="list-group-item list-goods-style">
+                    {% for tag in goods.tags.all %}
+                        <a href="{% url 'ecoshop:search' tag.slug %}">
+                            <span class="badge badge-pill badge-success">{{ tag }}</span>
+                        </a>
+                    {% endfor %}
+                </li>
+                {% endif %}
+            </ul>
+
+            </div>
+        </div>
+
+    </div>
+
+    {% if goods.goods_info or goods.manufacturer or goods.product_care %}
+    <div class="row row-cols-1 row-cols-sm-1 row-cols-md-3 row-cols-lg-3 row-cols-xl-3 goods_page_3_info">
+        {% if goods.goods_info %}
+        <div class="col">
+            <h2 class="product_details_goods_page">Информация о товаре</h2>
+            <ul class = "goods_page_ul">
+                {% for abstract in goods.info_as_list %}
+                <li class="list_products_details text__details">{{ abstract }}</li>
+                {% endfor %}
+            </ul>
+        </div>
+        {% endif %}
+
+        {% if goods.manufacturer %}
+        <div class="col">
+            <h2 class="product_details_goods_page">Производитель</h2>
+            <p class="text__details">{{ goods.manufacturer|linebreaksbr }}</p>
+        </div>
+        {% endif %}
+
+        {% if goods.product_care %}
+        <div class="col">
+            <h2 class="product_details_goods_page">Уход</h2>
+            <p class="text__details">{{ goods.product_care|linebreaksbr }}</p>
+        </div>
+        {% endif %}
+    </div>
+    {% endif %}
+
+    <div class="goods_page_row_border"></div>
+
+    <div class="row justify-content-md-center accardion_row" style="margin-top: 5%;">
+
+        <div id="carouselExampleIndicators" class="carousel slide" data-ride="carousel">
+            <ol class="carousel-indicators">
+            <li data-target="#carouselExampleIndicators" data-slide-to="0" class="active"></li>
+            <li data-target="#carouselExampleIndicators" data-slide-to="1"></li>
+            <li data-target="#carouselExampleIndicators" data-slide-to="2"></li>
+            <li data-target="#carouselExampleIndicators" data-slide-to="3"></li>
+            </ol>
+    
+            <div class="carousel-inner">
+                {% for groups in list_goods_category %}
+                <div class="carousel-item {% if forloop.counter0 == 0 %} {{ active }} {% endif %}">
+                    <div class="row justify-content-center">
+                        {% for item in groups %}
+                        <div class="col-3">
+                            <a href="{% url 'ecoshop:goods_detail' item.category_name.category_slug item.goods_slug %}" data-toggle="tooltip" title="{{ item.goods_name }}">
+                                <div class="card mb-4 shadow-sm" >
+                                    <img src="{{ item.goods_image.url }}" class="card-img-top" alt="Изображение">
+                                    <div class="card-body text_display_accardion">
+                                        <h5 class="card-title text-center accardion_card_title text-truncate">{{ item.goods_name }}</h5>
+                                        <p class="card-text text-left text_display_accardion"><span class="accardion_price">{{ item.price }} ₽</span></p>
+                                    </div>
+                                </div>
+                            </a>
+                        </div>
+                        {% endfor %} 
+                    </div>
+                </div>
+                {% endfor %}
+            </div>
+    
+            <a class="carousel-control-prev" href="#carouselExampleIndicators" role="button" data-slide="prev">
+                <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+                <span class="sr-only">Previous</span>
+            </a>
+            <a class="carousel-control-next" href="#carouselExampleIndicators" role="button" data-slide="next">
+                <span class="carousel-control-next-icon" aria-hidden="true"></span>
+                <span class="sr-only">Next</span>
+            </a>
+    
+        </div>
+    </div>
+
+</div>
+{% endblock %}

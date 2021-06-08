@@ -1,0 +1,41 @@
+{% extends "layout/base.html" %}
+
+{% block title %}{{ category.category_name }}{% endblock %}
+
+{% block main %}
+    <section class="jumbotron text-center">
+        <div class="container">
+          <h1 class="jumbotron-heading category_title">{{ category }}</h1>
+          <p>
+            <a href="#" class="btn my-2 link_style">Отзывы</a>
+            <a href="#" class="btn my-2 link_style">Новости</a>
+            <a href="#" class="btn my-2 link_style">Доставка</a>
+          </p>
+        </div>
+      </section>
+
+      <div class="container">
+        <div class="row row-cols-1 row-cols-sm-2 row-cols-md-3 row-cols-lg-4 row-cols-xl-4">
+          {% if goods %}
+            {% for good in goods %}
+            <div class="col">
+                <a href="{% url 'ecoshop:goods_detail' category.category_slug good.goods_slug %}" class="a_color" data-toggle="tooltip" title="{{ good.goods_name }}">
+                <div class="card mb-4 shadow-sm" >
+                  <img src="{{ good.goods_image.url }}" class="card-img-top" alt="...">
+                  <div class="card-body">
+                  <h5 class="card-title text-center d-block text-truncate goods_name">{{ good.goods_name }}</h5>
+                  <p class="card-text text-left goods_dop_info"><span class="goods_price">{{ good.price }} ₽</span></p>
+                  </div>
+                </div>
+                </a>
+            </div>
+            {% endfor %}
+          {% else %}
+          <div class="col-12 col-sm-12 col-md-12 col-lg-12 col-xl-12 category_title emoji_search text-center">
+            <p>｡◕‿‿◕｡</p> 
+            <p>~~~ а товаров еще нет ~~~</p>
+          </div>
+          {% endif %}
+        </div>
+      </div>
+{% endblock %}

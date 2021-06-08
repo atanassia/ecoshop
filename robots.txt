@@ -1,0 +1,7 @@
+User-agent: *
+
+Disallow: /administrator/ 
+
+Disallow: /admin/*
+
+Sitemap: https://site.ru/sitemap.xml

@@ -1,0 +1,35 @@
+{% extends "layout/base.html" %}
+
+{% block title %}Каталоги товаров{% endblock %}
+
+{% block main %}
+<section class="jumbotron text-center">
+    <div class="container">
+      <h1 class="jumbotron-heading category_title">Каталоги товаров</h1>
+      <p class="lead text-muted jumbotron-text-top category_main_info">Экомагазин для тех, кто ценит естественное, заботится о своём здоровье и задумывается о будущем.</p>
+      <p>
+        <a href="#" class="btn my-2 link_style">Отзывы</a>
+        <a href="#" class="btn my-2 link_style">Новости</a>
+        <a href="#" class="btn my-2 link_style">Доставка</a>
+      </p>
+    </div>
+</section>
+
+    <div class="container">
+      <div class="row row-cols-1 row-cols-sm-2 row-cols-md-2 row-cols-lg-3 row-cols-xl-3"><!-- justify-content-md-center -->
+        {% for catalog in catalogs %}
+          <div class="col">
+              <div class="card mb-4 shadow-sm" >
+                <a href="{% url 'ecoshop:goods_list' catalog.category_slug %}"><img src="{{ catalog.category_image.url }}" class="card-img-top" alt="...">
+                <div class="card-body">
+                <h5 class="card-title text-center category_name">{{ catalog.category_name }}</h5>
+                <p class="card-text text-center category_drop_info" >{{ catalog.category_info }}</p>
+                <!-- <a href="{% url 'ecoshop:goods_list' catalog.category_slug %}" class="btn btn-primary card_button btn-sm category_button">Перейти</a> -->
+                </a>  
+              </div>
+              </div>
+          </div>
+        {% endfor %}
+      </div>
+    </div>
+{% endblock %}

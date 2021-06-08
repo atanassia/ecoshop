@@ -1,0 +1,61 @@
+{% extends "layout/base_home.html" %}
+
+{% block title %}Моя информация{% endblock %}
+
+
+{% block main %}
+<div class="col-12 col-sm-12 col-md-8 col-lg-6 col-xl-6">
+    <div class="my_info_main">
+        <div class = "header-container mb-4">
+            <h1 class = "my_info_title text-center" id = "my_info">Моя информация</h1>
+            <div class = "my_info_help_text">
+                <span>Вы можете обновить вашу учетную запись и внести изменения в любой момент.</span>
+            </div>
+        </div>
+
+        <div class="body_container">
+            <form class="needs-validation" method="POST" action="">
+                {% csrf_token %}
+
+                <div class="form-group row">
+                    <div class="col">
+                        <label for="inputFirstName" class="col-form-label forms_style">Имя:</label>
+                        {{ form.first_name }}
+                    </div>
+                </div>
+
+                <div class="form-group row">
+                    <div class="col">
+                        <label for="inputLastName" class="col-form-label forms_style">Фамилия:</label>
+                        {{ form.last_name }}
+                    </div>
+                </div>
+
+                <div class="form-group row">
+                    <div class="col">
+                        <label for="inputEmail" class="col-form-label forms_style">Почта:</label>
+                        {{ form.email }}
+                    </div>
+                </div>
+
+                <!-- Footer -->
+                <div class="form-group row float-right mt-3 mb-5 mr-2">
+                    <button type="submit" class="btn btn-primary">Сохранить изменения</button>
+                </div>
+
+            </form>
+        </div>
+        <div>
+            {% for message in messages %}
+                <div class="alert alert-{{ message.tags }} alert-dismissible fade show mt-5" role="alert">
+                    {{ message }}
+                    <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+            {% endfor %}
+        </div>
+    </div>
+</div>
+
+{% endblock %}

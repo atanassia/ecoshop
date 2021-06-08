@@ -1,0 +1,81 @@
+{% extends "layout/base.html" %}
+
+{% block title %}Авторизация{% endblock %}
+{% block main %}
+<div class="container">
+    
+    {% for message in messages %}
+    <div class="alert alert-{{ message.tags }} alert-dismissible fade show mt-5" role="alert">
+        {{ message }}
+        <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+    </div>
+    {% endfor %}
+
+    <div class="row justify-content-center">
+        <div class="col-12 col-sm-12 col-md-9 col-lg-7 col-xl-6">
+            <!-- Header -->
+            <div class="form-header">
+                <h4 class="title mb-3 mt-4 forms_style" id="exampleLabel">Авторизация</h4>
+            </div>
+
+            <!-- Modal Body -->
+            <div class="form-body">
+                <form class="needs-validation" method="POST" action="" novalidate>
+                    {% csrf_token %}
+
+                    <!-- Почта -->
+                    <!-- <div class="form-group row">
+                        <label for="inputEmail" class="col-sm-2 col-form-label forms_style">Почта</label>
+                        <div class="col-sm-10">
+                            <input type="email" class="form-control" id="inputEmail" name = "email" placeholder ="you@mail.ru" required>
+                        </div>
+                    </div> -->
+                    
+                    <!-- Никнейм -->
+                    <div class="form-group row">
+                        <label for="inputUsername" class="col-sm-2 col-form-label forms_style">Никнейм</label>
+                        <div class="col-sm-10">
+                            <input type="username" class="form-control" id="inputUsername" name = "username"  placeholder = "Введите имя пользователя" required>
+                        </div>
+                    </div>
+
+                    <!-- Пароль -->
+                    <div class="form-group row">
+                        <label for="inputPassword" class="col-sm-2 col-form-label forms_style">Пароль</label>
+                        <div class="col-sm-10">
+                            <input type="password" class="form-control" id="inputPassword" name = "password" required>
+                        </div>
+                    </div>
+                    
+                    <!-- Запоминалочка -->
+                    <!-- <div class="checkbox mb-3 forms_style">
+                        <label>
+                        <input type="checkbox" value="remember-me"> Запомнить меня
+                        </label>
+                    </div> -->
+                    
+                    <!-- Footer -->
+                    <div class="form-footer float-right mt-5">
+                        <button type="submit" class="btn btn-primary">Отправить</button>
+                    </div>
+                </form>
+            </div>
+
+            <div class="login-reverse forms_style google">
+                <a class="log_reg_url" href='{% url "social:begin" "google-oauth2" %}'>Войти через гугл</a>
+            </div>
+            
+            <div class="login-reverse forms_style">
+                <span>Нет аккаунта? <a class="log_reg_url" href="{% url 'accounts:register' %}">Зарегистрироваться</a>.</span>
+            </div>
+
+            <div class="login-reverse forms_style">
+                <span>Не можете войти? <a class="log_reg_url" href="{% url 'accounts:reset_password' %}">Сменить пароль</a>.</span>
+            </div>
+    
+        </div>
+    </div>
+</div>
+{% endblock %}

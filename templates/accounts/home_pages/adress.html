@@ -1,0 +1,84 @@
+{% extends "layout/base_home.html" %}
+
+{% load static %}
+
+{% block title %}Адресная книга{% endblock %}
+
+
+
+{% block main %}
+<div class="col-12 col-sm-12 col-md-8 col-lg-6 col-xl-6">
+    <div class="my_info_main">
+        <div class = "header-container mb-4">
+            <h1 class = "my_info_title text-center" id = "adress">Адресная книга</h1>
+            <div class = "mt-3 mb-3 my_info_help_text">
+                <a href="{% url 'accounts:add_adress' %}" class = "btn btn-block btn-outline-dark" role="button">Добавить новый адрес</a>
+            </div>
+        </div>
+        
+        <div>
+            {% if adresses %}
+                <ul class= "list-group">
+                    <div>
+                        {% for form in adresses %}
+                        <li class = "list-group-item pb-3 pt-3 adresses_li_border">
+                            <div class="row">
+                                <div class="col-9 col-sm-10 col-md-8 col-xl-8 col-lg-8">
+                                    <div>
+                                        <div>{{ form.id }}</div>
+                                        <div>{{ form.adress }}</div>
+                                        <div>{{ form.city }}</div>
+                                    </div>
+                                    {% if form.default_adress %}
+                                        <div class = "default_adress_text pt-3">
+                                            <span class = "default_adress_text">Это ваш адрес доставки по умолчанию</span>
+                                        </div>
+                                    {% endif %}
+                                </div>
+
+                                <div class="col-3 col-sm-2 col-md-4 col-xl-4 col-lg-4">
+                                    <div class ="adress_dop_button_div_1">
+                                        <div class="adress_dop_button_div_1_1 mb-1">
+                                            <a class="link_style text-right" href="{% url 'accounts:change_adress' form.id %}">
+                                                <div aria-label="Изменить" class="adress_dop_button_div_1_1_1">
+                                                    <span class="text_adress_help">Изменить</span>
+                                                    <img alt="" class="home_adress_del_change_img" src="{% static 'icons/pen.svg' %}">
+                                                </div>
+                                            </a>
+                                        </div>
+
+                                        <div class="adress_dop_button_div_1_1 mb-1">
+                                            <a class="link_style text-right" href="{% url 'accounts:delete_adress' form.id %}">
+                                                <div aria-label="Удалить2" class="adress_dop_button_div_1_1_1">
+                                                    <span class="text_adress_help">Удалить</span>
+                                                    <img alt="" class="home_adress_del_change_img" src="{% static 'icons/basket.svg' %}">
+                                                </div>
+                                            </a>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </li>
+                        {% endfor %}
+                    </div>
+                </ul>
+            {% else %}
+                <div class = "my_info_help_text">
+                    <span>У вас нет адресов.</span>
+                </div>
+            {% endif %}
+        </div>
+
+        {% for message in messages %}
+        <div class="alert alert-{{ message.tags }} alert-dismissible fade show mt-5" role="alert">
+            {{ message }}
+            <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+            <span aria-hidden="true">&times;</span>
+            </button>
+        </div>
+        {% endfor %}
+    </div>
+
+</div>
+
+{% endblock %}

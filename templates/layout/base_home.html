@@ -1,0 +1,221 @@
+{% load static %}
+
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta http-equiv="Content-Type" content="text/html" charset="UTF-8">
+    <link rel = "stylesheet" type="text/css" href="{% static 'css/style.css' %}"/>
+    <link rel = "stylesheet" type="text/css" href="{% static 'css/bootstrap.css' %}"/>
+    <link rel="shortcut icon" href="{% static 'icons/tree.svg' %}" type="image/x-icon">	
+    <title>{% block title %}{% endblock %}</title>
+    <meta name="theme-color" content="#669966">
+    <meta http-equiv="X-UA-Compatible" content="IE=Edge,chrome=1"/>
+</head>
+
+<body class="body-home">
+    <div class="wrapper">
+        <header>
+            <a href="{% url 'accounts:home' %}"><h1 class = "title_home_h1 link_style text-center">Личный кабинет</h1></a>
+        </header>
+
+        <main class="main">
+            <div class="container-fluid">
+                <div class="row justify-content-md-center">
+                    <div class="col-12 col-sm-12 col-md-4 col-lg-3 col-xl-3">
+                        <div class = "username_home text-center mb-1 text-truncate">
+                            <span>Здравствуйте, </span><br> <span class = "username_home_name" title="{{ user.username }}">{{ user.username }}</span>
+                        </div>
+
+                        <nav>
+                            <ul class="list-group mb-1">
+                                <li class="list-group-item">
+                                    <a href="{% url 'ecoshop:test' %}" class="base_home_lists">
+                                        <div class = "img_div1">
+                                            <div class = "img_div2"> 
+                                                <img src="{% static 'icons/home_main.svg' %}" alt="" class="img_div3">
+                                            </div>
+                                        </div>
+
+                                        <div class = "text-menu-base-home">
+                                            <span>Главная</span>
+                                        </div>
+                                    </a>
+                                </li>
+                            </ul>
+
+                            <ul class="list-group mt-1">
+                                <li class="list-group-item">
+                                    <a href="#" class="base_home_lists">
+                                        <div class = "img_div1">
+                                            <div class = "img_div2"> 
+                                                <img src="{% static 'icons/orders.svg' %}" alt="" class="img_div3">
+                                            </div>
+                                        </div>
+
+                                        <div class = "text-menu-base-home">
+                                            <span>Мои заказы</span>
+                                        </div>
+                                    </a>
+                                </li>
+
+                                <li class="list-group-item">
+                                    <a href="#" class="base_home_lists">
+                                        <div class = "img_div1">
+                                            <div class = "img_div2"> 
+                                                <img src="{% static 'icons/bag.svg' %}" alt="" class="img_div3">
+                                            </div>
+                                        </div>
+
+                                        <div class = "text-menu-base-home">
+                                            <span>Корзина</span>
+                                        </div>
+                                    </a>
+                                </li>
+
+                                <li class="list-group-item">
+                                    <a href="{% url 'accounts:fav_goods' %}" class="base_home_lists">
+                                        <div class = "img_div1">
+                                            <div class = "img_div2"> 
+                                                <img src="{% static 'icons/heart.svg' %}" alt="" class="img_div3">
+                                            </div>
+                                        </div>
+
+                                        <div class = "text-menu-base-home">
+                                            <span>Избранное</span>
+                                        </div>
+                                    </a>
+                                </li>
+                            </ul>
+                               
+                            <ul class="list-group mt-1">
+                                <li class="list-group-item">
+                                    <a href="{% url 'accounts:my_info' %}" class="base_home_lists">
+                                        <div class = "img_div1">
+                                            <div class = "img_div2"> 
+                                                <img src="{% static 'icons/myinfo.svg' %}" alt="" class="img_div3">
+                                            </div>
+                                        </div>
+
+                                        <div class = "text-menu-base-home">
+                                            <span>Моя информация</span>
+                                        </div>
+                                    </a>
+                                </li>
+
+                                <li class="list-group-item">
+                                    <a href="{% url 'accounts:adresses' %}" class="base_home_lists">
+                                        <div class = "img_div1">
+                                            <div class = "img_div2"> 
+                                                <img src="{% static 'icons/adress.svg' %}" alt="" class="img_div3">
+                                            </div>
+                                        </div>
+
+                                        <div class = "text-menu-base-home">
+                                            <span>Адресная книга</span>
+                                        </div>
+                                    </a>
+                                </li>
+
+                                <li class="list-group-item">
+                                    <a href="{% url 'accounts:contacts' %}" class="base_home_lists">
+                                        <div class = "img_div1">
+                                            <div class = "img_div2"> 
+                                                <img src="{% static 'icons/net.svg' %}" alt="" class="img_div3">
+                                            </div>
+                                        </div>
+
+                                        <div class = "text-menu-base-home">
+                                            <span>Способы связи</span>
+                                        </div>
+                                    </a>
+                                </li>
+
+                            </ul>
+
+                            <ul class="list-group mt-1">
+                                <li class="list-group-item">
+                                    <a href="#" class="base_home_lists">
+                                        <div class = "img_div1">
+                                            <div class = "img_div2"> 
+                                                <img src="{% static 'icons/help.svg' %}" alt="" class="img_div3">
+                                            </div>
+                                        </div>
+
+                                        <div class = "text-menu-base-home">
+                                            <span>Нужна помощь?</span>
+                                        </div>
+                                    </a>
+                                </li>
+
+                                <li class="list-group-item">
+                                    <a href="#" class="base_home_lists">
+                                        <div class = "img_div1">
+                                            <div class = "img_div2"> 
+                                                <img src="{% static 'icons/other.svg' %}" alt="" class="img_div3">
+                                            </div>
+                                        </div>
+
+                                        <div class = "text-menu-base-home">
+                                            <span>Как вернуть заказ?</span>
+                                        </div>
+                                    </a>
+                                </li>
+
+                                <li class="list-group-item">
+                                    <a href="#" class="base_home_lists">
+                                        <div class = "img_div1">
+                                            <div class = "img_div2"> 
+                                                <img src="{% static 'icons/other.svg' %}" alt="" class="img_div3">
+                                            </div>
+                                        </div>
+
+                                        <div class = "text-menu-base-home">
+                                            <span>Где мой заказ?</span>
+                                        </div>
+                                    </a>
+                                </li>
+                            </ul>
+
+                            <!-- ///////////////////////////////// -->
+                            <ul class="list-group mt-1 mb-1">
+                                <li class="list-group-item">
+                                    <a href="{% url 'accounts:logout' %}" class="base_home_lists">
+                                        <div class = "img_div1">
+                                            <div class = "img_div2"> 
+                                                <img src="{% static 'icons/exit.svg' %}" alt="" class="img_div3">
+                                            </div>
+                                        </div>
+
+                                        <div class = "text-menu-base-home">
+                                            <span>Выход</span>
+                                        </div>
+                                    </a>
+                                </li>
+                            </ul>
+                            </ul>
+                        </nav>
+                     </div>
+                    {% block main %}
+                    {% endblock %}
+                </div>
+            </div>
+        </main>
+
+        <footer class = "footer">
+            <div class="footer_class">
+                <p>Эко-магазин от Лизы.</p>
+                <p>
+                <a href="#" style="color:#669966">Вернуться к началу.</a>
+                </p>
+            </div>
+        </footer>
+        
+    </div>
+    
+    <script type="text/javascript" src="https://code.jquery.com/jquery-3.5.1.slim.min.js" integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj" crossorigin="anonymous"></script>
+    <script type="text/javascript" src="{% static 'js/bootstrap.js' %}"></script>
+
+</body>
+
+</html>

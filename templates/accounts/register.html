@@ -1,0 +1,97 @@
+{% extends "layout/base.html" %}
+
+{% block title %}Регистрация{% endblock %}
+
+{% block main %}
+<div class="container">
+    {% if warning %}
+    <div class="alert alert-warning alert-dismissible fade show mt-5" role="alert">
+        <strong>Внимание!</strong> Попробуйте зарегистрироваться снова.
+        <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+    </div>
+    {% endif %}
+
+    {% if form.errors %}
+        {% for field in form %}
+            {% for error in field.errors %}
+            <div class="alert alert-warning alert-dismissible fade show mt-5" role="alert">
+            <strong>{{field.label}}: </strong>{{ error|escape }}
+            <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+            <span aria-hidden="true">&times;</span>
+            </button>
+            </div>
+            {% endfor %}
+        {% endfor %}
+    {% endif %}
+
+    <div class="row justify-content-center">
+        <div class="col-12 col-sm-12 col-md-9 col-lg-7 col-xl-6">
+            <!-- Header -->
+            <div class="form-header">
+                <h4 class="title mb-3 mt-4 forms_style" id="exampleLabel">Регистрация</h4>
+            </div>
+
+            <!-- Body -->
+            <div class="form-body">
+                <form class="needs-validation" method="POST" action="" novalidate>
+                    {% csrf_token %}
+                    <!-- Имя, фамилия -->
+                    <div class="form-group row">
+                        <div class="col">
+                            {{ form.first_name }}
+                        </div>
+                        <div class="col">
+                            {{ form.last_name }}
+                        </div>
+                    </div>
+
+                    <!-- Никнейм -->
+                    <div class="form-group row">
+                        <label for="inputUsername" class="col-sm-2 col-form-label forms_style">Никнейм<span style="color:red;">*</span></label>
+                        <div class="col-sm-10">
+                            {{ form.username }}
+                        </div>
+                    </div>
+
+                    <!-- Почта -->
+                    <div class="form-group row">
+                        <label for="inputEmail" class="col-sm-2 col-form-label forms_style">Почта<span style="color:red;">*</span></label>
+                        <div class="col-sm-10">
+                            {{ form.email }}
+                        </div>
+                    </div>
+
+                    <!-- Пароль -->
+                    <div class="form-group row">
+                        <label for="inputPassword" class="col-sm-2 col-form-label forms_style">Пароль<span style="color:red;">*</span></label>
+                        <div class="col-sm-10">
+                            {{ form.password1 }}
+                        <small id="passwordHelpInline" class="text-muted">Ваш пароль должен содержать как минимум 8 символов.<br> Пароль не может состоять только из цифр.</small>
+                        </div>
+                    </div>
+
+                    <div class="form-group row">
+                        <label for="inputPasswordConfirmation" class="col-sm-2 col-form-label"></label>
+                        <div class="col-sm-10">
+                            {{ form.password2 }}
+                        </div>
+                    </div>
+
+                    <div class="login-reverse forms_style">
+                        <span>Уже есть аккаунт? <a class="log_reg_url" href="{% url 'accounts:login' %}">Авторизоваться</a>.</span>
+                    </div>
+
+                    <!-- Footer -->
+                    <div class="form-footer float-right mt-3">
+                        <button type="submit" class="btn btn-primary">Отправить</button>
+                    </div>
+
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+
+{% endblock %}

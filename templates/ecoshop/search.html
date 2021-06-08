@@ -1,0 +1,63 @@
+{% extends "layout/base.html" %}
+
+{% block title %}Поиск{% endblock %}
+
+{% block main %}
+<div class = "custom_error text-center">
+  {% if searched or tag %}
+    {% if goods or catalogs %}
+      {% if catalogs %}
+          <h3 class="text-center category_title mb-3">Каталоги</h3>
+          <div class="container">
+              <div class="row row-cols-2 row-cols-sm-2 row-cols-md-3 row-cols-lg-3 row-cols-xl-3">
+                {% for catalog in catalogs %}
+                  <div class="col">
+                      <div class="card mb-4 shadow-sm" >
+                        <a href="{% url 'ecoshop:goods_list' catalog.category_slug %}"><img src="{{ catalog.category_image.url }}" class="card-img-top" alt="..."></a>
+                        <div class="card-body">
+                        <h5 class="card-title text-center category_name_search">{{ catalog.category_name }}</h5>
+                        <!-- <p class="card-text text-center category_drop_info">{{ catalog.category_info }}</p> -->
+                        </div>
+                      </div>
+                  </div>
+                {% endfor %}
+              </div>
+            </div>
+      {% endif %}
+
+      {% if goods %}
+          <h3 class="text-center category_title mb-3">Товары</h3>
+          <div class="container">
+              <div class="row row-cols-2 row-cols-sm-3 row-cols-md-4 row-cols-lg-4 row-cols-xl-4">
+                {% for good in goods %}
+                <div class="col">
+                    <a href="{% url 'ecoshop:goods_detail' good.category_name.category_slug good.goods_slug %}" class="a_color" data-toggle="tooltip" title="{{ good.goods_name }}">
+                    <div class="card mb-4 shadow-sm" >
+                      <img src="{{ good.goods_image.url }}" class="card-img-top" alt="...">
+                      <div class="card-body">
+                      <h5 class="card-title text-center d-block text-truncate goods_name">{{ good.goods_name }}</h5>
+                      <p class="card-text text-left goods_dop_info"><span class="goods_price">{{ good.price }} ₽</span></p>
+                      </div>
+                    </div>
+                    </a>
+                </div>
+                {% endfor %}
+              </div>
+            </div>
+      {% endif %}
+
+    {% else %}
+      <div class="category_title emoji_search">
+        <p>Ничего не нашли</p>
+        <p>(っ╥╯﹏╰╥c)</p> 
+      </div>
+    {% endif %}
+      
+  {% else %}
+    <div class="category_title emoji_search">
+      <p>а где ваш текст?</p>
+      <p>{{smile}}</p> 
+    </div>
+  {% endif %}
+</div>
+{% endblock %}
