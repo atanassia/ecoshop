@@ -6,7 +6,7 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 
 
 # SECURITY WARNING: keep the secret key used in production secret!
-SECRET_KEY = '0e)8#naua7osm%nddw%q^*(iy*p9r1xum(bt4921p=32u4=!=d1'
+SECRET_KEY = ''
 
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
@@ -155,8 +155,8 @@ EMAIL_HOST_USER = 'lizababayan12@gmail.com'
 EMAIL_HOST_PASSWORD = '060601aA'
 
 
-SOCIAL_AUTH_GOOGLE_OAUTH2_KEY = '752588181616-0b4fit9i2p3l774a4cs1n7d274km2007.apps.googleusercontent.com' # Google Consumer Key
-SOCIAL_AUTH_GOOGLE_OAUTH2_SECRET = 'x1EXKmvzL-HwwV482ikPP-kg' # Google Consumer Secret
+SOCIAL_AUTH_GOOGLE_OAUTH2_KEY = '' # Google Consumer Key
+SOCIAL_AUTH_GOOGLE_OAUTH2_SECRET = '' # Google Consumer Secret
 LOGIN_URL = '/auth/login/google-oauth2/'
 
 LOGIN_REDIRECT_URL = '/home/'
