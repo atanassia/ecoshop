@@ -1,3 +1,0 @@
-752588181616-0b4fit9i2p3l774a4cs1n7d274km2007.apps.googleusercontent.com
-x1EXKmvzL-HwwV482ikPP-kg
-python manage.py runserver_plus mysite.com:8080 --cert-file cert.crt
