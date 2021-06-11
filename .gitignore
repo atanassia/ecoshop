@@ -9,3 +9,6 @@ testsite/settings.py
 
 static/admin
 static/django_extensions
+
+
+googleinfo.txt
