@@ -4,6 +4,7 @@ from .forms import (
     LoginForm, RegisterForm, EditProfileForm, UsersAdressesAddForm, 
     EditUsersAdressesForm, UsersContactPreferencesForm)
 from django.contrib import messages
+from django.contrib.auth.models import Group
 
 from .models import UsersContactPreferences, UsersAdresses
 from ecoshop.models import Goods
@@ -22,9 +23,11 @@ def register_view(request):
         if request.method == 'POST':
             form = RegisterForm(request.POST)
             if form.is_valid():
-                form.save()
-                user = form.cleaned_data.get('username')
-                messages.success(request, "Вы успешно зарегистрировались под ником " + user)
+                user = form.save()
+                username = form.cleaned_data.get('username')
+                group = Group.objects.get(name = 'customer')
+                user.groups.add(group)
+                messages.success(request, "Вы успешно зарегистрировались под ником " + username)
                 return redirect('accounts:login')
         context = {'form':form}
         return render(request, 'accounts/register.html', context)

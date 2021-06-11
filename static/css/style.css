@@ -48,6 +48,11 @@ footer {
 	color:#606060;
 }
 
+.search_button{
+	border:none !important;
+	border-color: none !important;
+}
+
 .category_title, .goods_dop_info, .goods_page_header_code{
 	color:#404040;
 	font-family: 'PT Serif', serif;
@@ -178,6 +183,7 @@ footer {
 
 a.base_home_lists:hover{
 	text-decoration:underline;
+	text-decoration-color:#2d2d2d;
 	transition: color .2s linear;
 }
 

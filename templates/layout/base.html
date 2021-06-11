@@ -32,7 +32,7 @@
 					<form action="{% url 'ecoshop:search' %}" method="POST" class="form-inline search_form">
 						{% csrf_token %}
 						<input class="form-control mr-sm-2 searchbar" name="searched" type="search" placeholder="Искать" aria-label="Поиск">
-						<button class="btn btn-outline-light" type="submit" href='#'><img height=21px; src="{% static 'icons/search.svg' %}" alt="icon"/></button>			
+						<button class="btn btn-outline-light search_button" type="submit" href='#'><img height=21px; src="{% static 'icons/search.svg' %}" alt="icon"/></button>			
 					</form>	
 				</div>
         	</div>	

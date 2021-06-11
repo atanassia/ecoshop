@@ -111,6 +111,7 @@ AUTH_PASSWORD_VALIDATORS = [
 #Authentication backends
 AUTHENTICATION_BACKENDS = (
     'django.contrib.auth.backends.ModelBackend',
+    'social_core.backends.google.GoogleOAuth2',
 
 )
 
@@ -136,7 +137,8 @@ STATIC_URL = '/static/'
 STATICFILES_DIRS = [
     os.path.join(BASE_DIR, "static"),
 ]
-# STATIC_ROOT = os.path.join(BASE_DIR, 'static')
+
+# STATIC_ROOT = 'D:/python3/django_projects/djangoeco/v1/testsite/static'
 
 
 
@@ -146,12 +148,12 @@ MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
 
 
 #SMTP Configuration
-
 EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'
 EMAIL_HOST = 'smtp.gmail.com'
 EMAIL_PORT = 587
 EMAIL_USE_TLS = True
-EMAIL_HOST_USER = 'lizababayan12@gmail.com'
+EMAIL_USE_SSL = False
+EMAIL_HOST_USER = 'ecoshop.for.liza@gmail.com'
 EMAIL_HOST_PASSWORD = '060601aA'
 
 

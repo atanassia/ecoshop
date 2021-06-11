@@ -4,3 +4,8 @@ static/fonts/fonts_zip
 
 *.crt
 *.key
+
+testsite/settings.py
+
+static/admin
+static/django_extensions
