@@ -32,7 +32,12 @@
                 <li class="list-group-item goods_page_header_code list-goods-style">Код товара: {{ goods.product_code }}</li>
                 <li class="list-group-item goods_status list-goods-style">{{ goods.get_status_display }} </li>
                 <li class="list-group-item list-goods-style">
-                    <a class="btn btn-primary" type="submit">Добавить в корзину</a>
+
+                    <form style = "display: inline-block;" action="{% url '' %}">
+                        {% csrf_token %}
+                        <a class="btn btn-primary" type="submit">Добавить в корзину</a>
+                    </form>
+
                     {% if user.is_authenticated %}
                         <form style = "display: inline-block;" class = "like_form" action="{% url 'ecoshop:like_goods' %}" method="POST">
                             {% csrf_token %}

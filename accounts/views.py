@@ -12,7 +12,6 @@ from django.contrib.auth.models import User
 
 from django .contrib.auth.decorators import login_required
 
-from django.conf import settings
 
 
 def register_view(request):
@@ -58,8 +57,7 @@ def logout_view(request):
     #request.user == Anon user
     return redirect('accounts:login')
 
-#FIXME: при регистрации или логине через гугл пересылает не на /home/ , а на /accounts/login
-#ну короче чето нужно с этим делать, а вот че - не знаю
+
 @login_required(login_url = 'accounts:login')
 def home(request):
     return render(request, 'accounts/home_pages/home.html')
@@ -160,3 +158,6 @@ def change_contacts_preferences(request):
             messages.warning(request, 'Произошла ошибка, попробуйте позже или напишите нам.')
     context = {'form':form}
     return render(request, 'accounts/home_pages/contacts.html', context)
+
+
+
